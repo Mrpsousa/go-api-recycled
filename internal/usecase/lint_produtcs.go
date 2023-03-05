@@ -17,7 +17,7 @@ type ListProductUseCase struct {
 }
 
 // funcao construtora
-func NewListProductUseCase(productRepository entity.ProductRepository) *ListProductUseCase {
+func NewListProductsUseCase(productRepository entity.ProductRepository) *ListProductUseCase {
 	return &ListProductUseCase{ProductRepository: productRepository}
 }
 
