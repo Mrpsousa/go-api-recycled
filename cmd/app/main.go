@@ -12,10 +12,11 @@ import (
 	"github.com/api-go/internal/infra/web"
 	"github.com/api-go/internal/usecase"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:root@tcp(host.docker.internal:3306/products)")
+	db, err := sql.Open("mysql", "root:root@tcp(host.docker.internal:3306)/products")
 	if err != nil {
 		panic(err)
 	}
@@ -31,7 +32,7 @@ func main() {
 	r.Post("/products", productHandlers.CreateProductHandler)
 	r.Get("/products", productHandlers.ListProductsHandler)
 
-	go http.ListenAndServe(":8080", r)
+	go http.ListenAndServe(":8000", r)
 
 	msgChan := make(chan *kafka.Message)
 	go akafka.Consume([]string{"products"}, "host.docker.internal:9092", msgChan) //ouvindo o topic com goroutines
