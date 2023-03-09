@@ -25,3 +25,8 @@ created a simple api with golang to training
         "price": 100
     }
     Get ....
+
+## Test - Kafka
+    - in kafka container
+    - kafka-console-producer --bootstrap-server=localhost:9092 --topic=products
+        -   {"name": "Nome-02","price": 200}

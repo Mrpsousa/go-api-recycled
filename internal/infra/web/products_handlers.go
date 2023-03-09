@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/api-go/internal/usecase"
@@ -29,6 +30,8 @@ func (p *ProductHandlers) CreateProductHandler(w http.ResponseWriter, r *http.Re
 	output, err := p.CreateProductUseCase.Execute((input))
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		error_ := fmt.Sprintf("ERRO Create: %v", err)
+		fmt.Println(error_)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -40,6 +43,8 @@ func (p *ProductHandlers) ListProductsHandler(w http.ResponseWriter, r *http.Req
 	output, err := p.ListProductsUseCase.Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		error_ := fmt.Sprintf("ERRO List: %v", err)
+		fmt.Println(error_)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
